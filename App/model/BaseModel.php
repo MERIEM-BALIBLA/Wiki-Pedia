@@ -28,6 +28,26 @@ class BaseModel {
         }
     }
 
+    public function getEmail($table, $email)
+    {
+        try {
+            $query = "SELECT * FROM $table WHERE email = :email";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle the exception, log, or return false
+            echo "Error getting data by id: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function lastInsertId()
+    {
+        return $this->db->lastInsertId();
+    }
+
     public function index($table, $columns)
     {
         try {
@@ -55,16 +75,22 @@ class BaseModel {
 
                 $query = "INSERT INTO $table ($columns) VALUES ($values)";
                 $stmt = $this->db->prepare($query); // Utilisez $this->db au lieu de $this->PDO
+
+                foreach ($data as $key => $value) {
+                    $stmt->bindValue(":$key", $value);
+                }
+
                 $stmt->execute($data);
 
                 echo "Record added successfully!";
             } catch (PDOException $e) {
                 echo "Error creating record: " . $e->getMessage();
             }
+            // return $this->db->lastInsertId();
         }
 
 
-        protected function update($table, $data, $id)
+        public function update($table, $data, $id)
         {
             try {
                 $update_arr = [];
@@ -75,24 +101,49 @@ class BaseModel {
 
                 $query = "UPDATE $table SET $update_arr WHERE id = :id";
                 $data['id'] = $id;
+                echo "SQL Query: " . $query; // Or use error_log() for logging
+                var_dump($table, $data, $id);  // Add this line to debug
+
 
                 $stmt = $this->db->prepare($query);
                 $stmt->execute($data);
 
                 echo "Record updated successfully!";
             } catch (PDOException $e) {
-                echo "Error updating record: " . $e->getMessage();
+                error_log("Error updating record: " . $e->getMessage());
+                return false;
             }
         }
 
+        public function delete($table, $id)
+        {
+            try {
+                $query = "DELETE FROM $table WHERE id = :id";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                $stmt->execute();
 
-        public function delete($id){
-            $statement = $this->db->prepare('DELETE FROM media WHERE id = :id');
-            $statement -> bindParam(":id",$id);
-            return $statement->execute();
+                return true;
+            } catch (PDOException $e) {
+                throw new PDOException("Error deleting record: " . $e->getMessage());
+            }
         }
-        
 
+        public function deleteall($table)
+        {
+            try {
+                $query = "DELETE FROM $table";
+                $stmt = $this->db->prepare($query);
+                $stmt->execute();
+
+                return true;
+            } catch (PDOException $e) {
+                error_log("Error updating record: " . $e->getMessage());
+                return false;
+            }
+        }
+
+       
     }
 
 

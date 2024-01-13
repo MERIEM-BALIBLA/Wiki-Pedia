@@ -20,7 +20,7 @@ class Connexion {
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Output a message to indicate successful connection
-            echo "Connected to the database successfully";
+            // echo "Connected to the database successfully<br>";
         } catch (PDOException $e) {
             // Output an error message if connection fails
             echo "Connection failed: " . $e->getMessage();

@@ -67,9 +67,8 @@
         </aside>
         <div class="main">
             <nav class="navbar navbar-expand px-3 border-bottom" style="background: #888888;">
-                <!-- <button class="btn" id="sidebar-toggle" type="button">
-                    <span class="navbar-toggler-icon"></span>
-                </button> -->
+                
+                <div><?php echo "hello " . $_SESSION['name'] . "<br>";?></div>
                 <div class="navbar-collapse navbar">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
@@ -79,7 +78,7 @@
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="#" class="dropdown-item">Profile</a>
                                 <a href="#" class="dropdown-item">Setting</a>
-                                <a href="#" class="dropdown-item">Logout</a>
+                                <a href="<?=APP_URL?>Signup/Logout" class="dropdown-item">Logout</a>
                             </div>
                         </li>
                     </ul>

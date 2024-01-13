@@ -3,10 +3,10 @@
 namespace router;
 class Router
 {
-    private string $controller = 'App\Controller\HomeController';
+    private string $controller = 'App\Controller\IndexController';
     private string $method = 'index';
     private array $params = array();
-
+    
     public function __construct()
     {
         $this->Sender();

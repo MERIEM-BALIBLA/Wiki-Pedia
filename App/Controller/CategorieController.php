@@ -2,23 +2,37 @@
 
 namespace App\Controller;
 
+use App\Controller\BaseController;
+
 use App\Model\CategorieModel;
+
 use PDOException;
 
-class CategorieController
+class CategorieController extends BaseController
 {
     public function index()
     {
 
-        // // Assuming you have instantiated your models
+        // Assuming you have instantiated your models
         $categorieModel = new CategorieModel(); 
         
-        // // Fetch categories from the database
+        // Fetch categories from the database
         $categories = $categorieModel->index('categorie','*');
 
         include 'App/view/admin/categories/index.php';
     }
 
+    public function indexview()
+    {
+
+        // Assuming you have instantiated your models
+        $categorieModel = new CategorieModel(); 
+        
+        // Fetch categories from the database
+        $categories = $categorieModel->index('categorie','*');
+
+        include 'App/view/Index.php';
+    }
    
    
     public function insert()
@@ -43,38 +57,67 @@ class CategorieController
             }
 
             // Include the view file
-            include 'App/View/admin/categories/index.php';
+            include 'App/View/admin/categories/Insert.php';
+            header("Location: index");
         } else {
             // Render the form
             include 'App/View/admin/categories/Insert.php';
         }
-    }
+    } 
 
-    public function update($id)
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    public function update()
+    {
         $table = 'categorie';
-        $data = array(
-            'name' => $_POST['categorie'],
-            'description' => $_POST['description'],
-        );
 
-        $categorieModel = new CategorieModel();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $data = array(
+                // 'id' => $id,
+                'name' => $_POST['categorie'],
+                'description' => $_POST['description'],
+            );
 
-        $result = $categorieModel->update($table, $data, $id);
+            $categorieModel = new CategorieModel();
 
-        if ($result) {
-            echo "Record updated successfully!";
-        } else {
-            echo "Error updating record!";
+            $category = $categorieModel->update($table, $data, $id);
+            // $this -> show("admin/categories/index");
+            header("Location: index");
+
         }
-    } else {
-        $categorieModel = new CategorieModel();
-        $category = $categorieModel->getById('categorie', $id);
+    }
 
-        include 'App/view/admin/categories/index.php';
+    public function updateview() {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $categoriModel = new CategorieModel();
+            $category = $categoriModel->getById('categorie', $id);
+            $this->show("admin/categories/update", ['category' => $category]);
+        } 
+    }
+
+    public function delete()
+    {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $categoriModel = new CategorieModel();
+            $categoriModel->delete('categorie', $id);
+            header("Location: index");
+            
+        } 
+    }
+
+    public function deleteall()
+    {
+            $categoriModel = new CategorieModel();
+            $categoriModel->deleteall('categorie');
+            header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 }
 
+   
 
-}
+  
+
+
+
+

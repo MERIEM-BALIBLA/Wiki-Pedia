@@ -40,14 +40,27 @@ class CategorieModel extends BaseModel
             }
         }
 
-    public function delete($id) {
-        try {
-            parent::delete($id);
-            return true;
-        }catch(PDOException $e){
-            echo "Erreur lors de l'insertion : " . $e->getMessage();
-            return false;
+        public function delete($table, $id)
+        {
+            try {
+                parent::delete($table, $id);
+                return true;
+            } catch (PDOException $e) {
+                // Handle or log the exception
+                throw new PDOException("Error deleting record: " . $e->getMessage());
+            }
         }
-    }
+
+        public function deleteall($table)
+        {
+            try {
+                parent::deleteall($table);
+                return true;
+            } catch (PDOException $e) {
+                // Handle or log the exception
+                throw new PDOException("Error deleting record: " . $e->getMessage());
+            }
+        }
+
 }
 
