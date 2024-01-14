@@ -28,6 +28,13 @@
 <body>
 
 <?php include "include/nav.php" ?>
+<!-- <form class="d-flex">
+        <input class="form-control me-2 text-info bg-white custom-input" type="text" placeholder="Search">
+        <button class="btn btn-primary text-white" type="button">Search</button>
+      </form> -->
+    </div>
+  </div>
+</nav>
 
 <section class="vh-100" style="background-color: #eee;">
   <div class="container h-100">

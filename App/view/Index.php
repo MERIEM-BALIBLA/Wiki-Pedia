@@ -28,14 +28,35 @@
 <link rel="stylesheet" href="<?=APP_URL?>public/assets/css/article.css">
 <script src="<?=APP_URL?>public/assets/css/article.css"></script>
 
+
   <title></title>
 </head>
 <body style="background-color: #eee;">
-    <?php include "include/nav.php" ?>
-    
-    <a href="<?=APP_URL?>login/logout"><button>logout</button></a>
 
-   
+<?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'author' || $_SESSION['role'] === 'admin'): ?>
+    <?php include "include/navbar.php"; ?>
+<?php else: ?>
+    <?php include "include/nav.php"; ?>
+<?php endif; ?>
+    <form class="d-flex" id="searchForm" onsubmit="search">
+        <input class="form-control me-2 text-info bg-white custom-input" id="search" type="text" placeholder="Search">
+        <!-- <button class="btn btn-primary text-white" type="button" id="search">Search</button> -->
+        <button type="submit" class="btn btn-primary text-white" id="searchBtn">Search</button>
+
+      </form>
+    </div>
+  </div>
+</nav>
+
+<section style="width:100%; background-color: #ffffff;">
+            <div class="text-center p-2" style=" background-color: #839ba4; color: #fff; font-size:20px">All Wikis</div>
+        </div>
+    </section>
+
+   <!-- Autres éléments HTML avant la section de recherche -->
+<div id="wikis-container"></div>
+<!-- Autres éléments HTML après la section de recherche -->
+
     <div class="container mt-4">
         <div class="row">
 
@@ -61,18 +82,17 @@
         </div>
     </div>
 
-<!-- categorie -->
-<div style="background-color : red;">
-    <?php foreach ($categories as $category) :?>
-        <h1><?= $category['name'] ?></h1>
+<section class="p-4 row">
+<?php foreach ($categories as $category) :?>
+    <div class="col-3 p-2 me-4" style="background:linear-gradient(to right, #87CEEB, #1E90FF); text-align: center; color: black; border-radius: 10px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);">
+        <h3><?= $category['name'] ?></h3>
         <p><?= $category['description'] ?></p>
-    <?php endforeach; ?>
-</div>
-
-
-
-
+    </div>
+<?php endforeach; ?>
+</section>
 </div>
 
 <?php include "include/footer.php" ?>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="public/assets/js/search_script.js"></script>
 </body>

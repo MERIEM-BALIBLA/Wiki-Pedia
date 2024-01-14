@@ -1,43 +1,57 @@
-<header>
-        <nav class="navbar navbar-expand-lg">
-            <div class=" container">
-            <div style="display:flex; align-items:center;">
-                <a class="navbar-brand" href="#"><img src="./public/images/logo.png" alt="logo"></a>
-                <span>Wiki Pedia</span>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fa-solid fa-bars" style="color: white;"></i>
-            </button>
-            <div class="collapse navbar-collapse navbar_box" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin: 0 auto;">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index">Home</a>
-                    </li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    /* Custom styles */
+    .custom-input {
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjust shadow as needed */
+    }
+    .navbar-toggler-icon-dark {
+      background-color: #343a40; /* Dark color of your choice */
+    }
+  </style>
+</head>
+<body>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="search.php">Search</a>
-                    </li>
+<nav class="navbar navbar-expand-sm navbar-dark bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand text-dark" href="javascript:void(0)">WIKI</a>
+    <button class="navbar-toggler text-dark navbar-toggler-icon-dark" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+  
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="Signup/loginview">My Wikis</a>
-                    </li>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="<?=APP_URL?>index">Home</a>
+        </li>
+        <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'author'): ?>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="<?=APP_URL?>Wiki">My Wikis</a>
+            </li>
+        <?php endif; ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="Signup">Signup</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login">Login</a>
-                    </li>
-                </ul>
+        <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="<?=APP_URL?>Statistics">Dashboard</a>
+            </li>
+        <?php endif; ?>
 
-                <form class='d-flex nav_btn' role='search'>
-                    <a href='sign.php' style="background-color:orange;font-weight:bold;"
-                        class='btn btn-primary'>Connect</a>
-                </form>
-            </div>
-            
-            </div>
-        </nav>
-    </header>
+    
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="<?=APP_URL?>login/logout">Logout</a>
+        </li>
+      </ul>
+   
+     
+
+
+

@@ -25,40 +25,34 @@
   <title></title>
 </head>
 <body>
-<?php include "include/nav.php" ?>
+<?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'author' || $_SESSION['role'] === 'admin'): ?>
+    <?php include "include/navbar.php"; ?>
+<?php else: ?>
+    <?php include "include/nav.php"; ?>
+<?php endif; ?>
+    </div>
+  </div>
+</nav>
 
-    <h1>CHYPPO</h1>
-    <div>
+    <section class="p-4" style="text-align:center;background:#0f5470 ;color:white">
+        <h3>Wiki Details</h3>
+        <div style="width:30% ;margin: 0 auto;">
+        <p> Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+        </div>
+    </section>
+     
+    <div style="text-align:center;">
         <?php if (isset($_POST['id'])) : ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Category</th>
-                        <th>User</th>
-                        <th>Tag</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <span class="custom-checkbox">
-                                <input type="checkbox" id="checkbox1" name="options[]" value="1">
-                                <label for="checkbox1"></label>
-                            </span>
-                        </td>
-                        <td ><?= $articles[0]['name'] ?></td>
-                        <td><?= $articles[0]['description'] ?></td>
-                        <td><?= $articles[0]['categorie_name'] ?></td>
-                        <td><?= $articles[0]['user_name'] ?></td>
-                        <td><?= $articles[0]['tag_name'] ?></td>
-                    </tr>
-                </tbody>
-            </table>
+                        <h1 ><?= $articles[0]['name'] ?></h1>
+                        <p style="font-size:20px;"><?= $articles[0]['description'] ?></p>
+                        <p style="font-size:20px;"><?= $articles[0]['categorie_name'] ?></p>
+                        <p style="font-size:20px;"><?= $articles[0]['user_name'] ?></p>
+                        <p style="font-size:20px;"><?= $articles[0]['tag_name'] ?></p>
+                    
         <?php endif; ?>
     </div>
+<?php include "include/footer.php" ?>
+
 </body>
 
 </html>

@@ -13,10 +13,10 @@ class IndexController extends BaseController {
     {
         $articleModel = new ArticleModel();
         $categoriesModel = new CategorieModel();
-        $articleModel = new ArticleModel();
+        // $articleModel = new ArticleModel();
 
         $categories = $categoriesModel->index('categorie','*');
-        $articles = $articleModel->read();
+        $articles = $articleModel->readView();
         
 
         $data = [
@@ -27,5 +27,13 @@ class IndexController extends BaseController {
         $this->show('Index', $data);
         // $this->show('home', $data);
 
+    }
+
+    public function search()
+    {
+        $obj = new ArticleModel();
+        $input = $_POST['search'];
+        $result = $obj->search($input);
+        echo json_encode($result);
     }
 }

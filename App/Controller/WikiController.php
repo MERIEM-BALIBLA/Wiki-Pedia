@@ -41,7 +41,6 @@
         }
 
         public function updateview() {
-            echo "hello<br>";
 
             if (isset($_POST['id'])) {
                 $id = $_POST['id'];
@@ -158,8 +157,39 @@
     
             }
         }
-       
 
+
+
+// WikiController.php
+
+public function update()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
+        $name = $_POST['wiki'];
+        $description = $_POST['description'];
+        $categorie_id = $_POST['categorie_id'];
+        var_dump($name);
+
+        $dataToUpdate = [
+            'name' => $name,
+            'description' => $description,
+            'categorie_id' => $categorie_id,
+        ];
+
+        $articleModel = new ArticleModel();
+        var_dump($dataToUpdate);
+
+        $tags = isset($_POST['tag']) ? $_POST['tag'] : [];
+        $updateSuccess = $articleModel->updateArticleTags($id, $dataToUpdate, $tags);
+        header("Location: " . APP_URL . "wiki");
+
+        
+    } 
+}
+
+
+        
     }
 
       

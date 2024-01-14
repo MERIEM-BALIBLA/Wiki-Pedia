@@ -17,19 +17,11 @@
 <body style="display :flex">
 <?php include 'App/view/admin/include/side.php' ?>
 
-    <!-- <php include 'view/admin/include/header.php' ?> -->
-            <!-- <main class="content px-3 py-2"> -->
                 <div class="container-fluid" style="width: 94%;">
                     
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Employees</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            
-                            <a href="insert" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new article</span></a>
-                            <a href="deleteall" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>		
-                           
+                            <h2>Manage <b>Articles</b></h2>
                         </div>
                         </div>
                     </div>

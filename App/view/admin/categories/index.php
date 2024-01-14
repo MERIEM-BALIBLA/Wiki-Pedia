@@ -23,7 +23,7 @@
                     
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Employees</b></h2>
+                            <h2>Manage <b>Categories</b></h2>
                         </div>
                         <div class="col-sm-6">
                             
@@ -64,7 +64,7 @@
 
                         <td class="d-flex flex-row">
                          
-                            <form action="updateview" method="POST">
+                            <form action="categorie/updateview" method="POST">
                                 <input type="hidden" name="id" value="<?= $categorie['id'] ?>">
                                 <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
                             </form>

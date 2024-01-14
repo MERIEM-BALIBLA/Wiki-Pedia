@@ -21,6 +21,7 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-white">
   <div class="container-fluid">
+ 
     <a class="navbar-brand text-dark" href="javascript:void(0)">WIKI</a>
     <button class="navbar-toggler text-dark navbar-toggler-icon-dark" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
@@ -39,13 +40,13 @@
         </li>
       </ul>
    
-      <form class="d-flex">
+      <!-- <form class="d-flex">
         <input class="form-control me-2 text-info bg-white custom-input" type="text" placeholder="Search">
         <button class="btn btn-primary text-white" type="button">Search</button>
       </form>
     </div>
   </div>
-</nav>
+</nav> -->
 
 
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
@@ -31,7 +31,7 @@
               <a class="nav-link text-dark" href="index">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark"  href="Signup">My Wikis</a>
+              <a class="nav-link text-dark" href="Wiki">My Wikis</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-dark" href="login">Logout</a>
@@ -46,4 +46,4 @@
 </nav>
 
 
-
+ -->

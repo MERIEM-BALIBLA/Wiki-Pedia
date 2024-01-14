@@ -6,10 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="insert">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <form method="POST" action="insert" lass="shadow p-4">
 
         <div class="form-group">
-            <label for="exampleInputEmail1">Categorie</label>
+            <label for="exampleInputEmail1" class="form-label">Categorie</label>
             <input type="text" class="form-control" name="categorie" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Categorie">
         </div>
 

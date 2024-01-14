@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?=APP_URL?>public/assets/css/sb-admin-2.min.css">
-
- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body style="display :flex">
@@ -23,12 +21,12 @@
                     
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Employees</b></h2>
+                            <h2>Manage <b>Tags</b></h2>
                         </div>
                         <div class="col-sm-6">
                             
-                            <a href="insert" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new article</span></a>
-                            <a href="deleteall" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>		
+                            <a href="<?=APP_URL?>tag/insert" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new article</span></a>
+                            <a href="<?=APP_URL?>tag/deleteall" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>		
                            
                         </div>
                         </div>
@@ -61,12 +59,12 @@
 
                         <td class="d-flex flex-row">
                          
-                            <form action="updateview" method="POST">
+                            <form action="<?=APP_URL?>tag/updateview" method="POST">
                                 <input type="hidden" name="id" value="<?= $tag['id'] ?>">
                                 <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
                             </form>
 
-                            <form action="tag/delete" method="POST">
+                            <form action="<?=APP_URL?>tag/delete" method="POST">
                                 <input type="hidden" name="id" value="<?= $tag['id'] ?>">
                                 <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
                             </form>

@@ -21,23 +21,23 @@ class ArticleController extends BaseController
         include 'App/view/admin/articles/index.php';
     }
     
-    public function add(){
-        $articleModel = new ArticleModel(); 
-        // $this -> show("add");
-        $categoriesModel = new CategorieModel();
-        $categories = $categoriesModel->index('categorie','*');
+    // public function add(){
+    //     $articleModel = new ArticleModel(); 
+    //     // $this -> show("add");
+    //     $categoriesModel = new CategorieModel();
+    //     $categories = $categoriesModel->index('categorie','*');
 
-        $tagModel = new TagModel();
-        $tags = $tagModel->index('tag', '*');
+    //     $tagModel = new TagModel();
+    //     $tags = $tagModel->index('tag', '*');
 
-        $data = [
-            'categories' => $categories,
-            'tags' => $tags,
-        ];
+    //     $data = [
+    //         'categories' => $categories,
+    //         'tags' => $tags,
+    //     ];
 
-        include "App/view/admin/articles/add.php";
-        // $this->show('add',$data);
-    }
+    //     include "App/view/admin/articles/add.php";
+    //     // $this->show('add',$data);
+    // }
 
     
    
