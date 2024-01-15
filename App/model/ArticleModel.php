@@ -105,16 +105,14 @@ class ArticleModel extends BaseModel
                                 LEFT JOIN categorie ON article.categorie_id = categorie.id
                                 LEFT JOIN user ON article.user_id = user.id
                                 LEFT JOIN tag ON pivot.tag_id = tag.id
-
                                 GROUP BY article.id;
-                               
                             ";
   
 
                 $statement = $this->db->prepare($query);
                 $statement->execute();
     
-                return $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $statement->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 // Handle the exception (log it, display an error message, etc.)
                 // For simplicity, just rethrow the exception for now
@@ -140,16 +138,14 @@ class ArticleModel extends BaseModel
                                 LEFT JOIN user ON article.user_id = user.id
                                 LEFT JOIN tag ON pivot.tag_id = tag.id
                                 WHERE article.status = 'accepted'
-
-                                GROUP BY article.id;
-                               
+                                GROUP BY article.id
+                                ORDER BY article.id DESC
+                                LIMIT 6;
                             ";
-  
-
                 $statement = $this->db->prepare($query);
                 $statement->execute();
     
-                return $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $statement->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 // Handle the exception (log it, display an error message, etc.)
                 // For simplicity, just rethrow the exception for now
@@ -212,49 +208,47 @@ public function updateWikiState($id, $status)
     // update
 
     public function updateArticleTags($articleId, $dataToUpdate, $newTagIds)
-{
-    try {
-        // Début de la transaction
-        $this->db->beginTransaction();
+    {
+        try {
+            // Début de la transaction
+            $this->db->beginTransaction();
 
-        // Étape 1 : Mise à jour des données de l'article
-        $updateQuery = "UPDATE `article` SET `name` = :name, `description` = :description, `categorie_id` = :categorie_id WHERE `id` = :article_id";
-        $updateStatement = $this->db->prepare($updateQuery);
-        $updateStatement->bindParam(':article_id', $articleId);
-        $updateStatement->bindParam(':name', $dataToUpdate['name']);
-        $updateStatement->bindParam(':description', $dataToUpdate['description']);
-        $updateStatement->bindParam(':categorie_id', $dataToUpdate['categorie_id']);
-        $updateStatement->execute();
+            // Étape 1 : Mise à jour des données de l'article
+            $updateQuery = "UPDATE `article` SET `name` = :name, `description` = :description, `categorie_id` = :categorie_id WHERE `id` = :article_id";
+            $updateStatement = $this->db->prepare($updateQuery);
+            $updateStatement->bindParam(':article_id', $articleId);
+            $updateStatement->bindParam(':name', $dataToUpdate['name']);
+            $updateStatement->bindParam(':description', $dataToUpdate['description']);
+            $updateStatement->bindParam(':categorie_id', $dataToUpdate['categorie_id']);
+            $updateStatement->execute();
 
-        // Étape 2 : Suppression des enregistrements liés à cet article dans la table pivot
-        $deleteQuery = "DELETE FROM `pivot` WHERE `article_id` = :article_id";
-        $deleteStatement = $this->db->prepare($deleteQuery);
-        $deleteStatement->bindParam(':article_id', $articleId);
-        $deleteStatement->execute();
+            // Étape 2 : Suppression des enregistrements liés à cet article dans la table pivot
+            $deleteQuery = "DELETE FROM `pivot` WHERE `article_id` = :article_id";
+            $deleteStatement = $this->db->prepare($deleteQuery);
+            $deleteStatement->bindParam(':article_id', $articleId);
+            $deleteStatement->execute();
 
-        // Étape 3 : Insertion des nouveaux enregistrements dans la table pivot
-        $insertQuery = "INSERT INTO `pivot` (`article_id`, `tag_id`) VALUES (:article_id, :tag_id)";
-        $insertStatement = $this->db->prepare($insertQuery);
-        $insertStatement->bindParam(':article_id', $articleId);
+            // Étape 3 : Insertion des nouveaux enregistrements dans la table pivot
+            $insertQuery = "INSERT INTO `pivot` (`article_id`, `tag_id`) VALUES (:article_id, :tag_id)";
+            $insertStatement = $this->db->prepare($insertQuery);
+            $insertStatement->bindParam(':article_id', $articleId);
 
-        // Lier :tag_id à l'intérieur de la boucle
-        foreach ($newTagIds as $tagId) {
-            $insertStatement->bindParam(':tag_id', $tagId);
-            $insertStatement->execute();
+            // Lier :tag_id à l'intérieur de la boucle
+            foreach ($newTagIds as $tagId) {
+                $insertStatement->bindParam(':tag_id', $tagId);
+                $insertStatement->execute();
+            }
+
+            // Validation de la transaction
+            $this->db->commit();
+            return true;
+        } catch (PDOException $e) {
+            // En cas d'erreur, annulez la transaction
+            $this->db->rollBack();
+            echo "Erreur lors de la mise à jour des tags et de l'article : " . $e->getMessage();
+            return false;
         }
-
-        // Validation de la transaction
-        $this->db->commit();
-
-        return true;
-    } catch (PDOException $e) {
-        // En cas d'erreur, annulez la transaction
-        $this->db->rollBack();
-        echo "Erreur lors de la mise à jour des tags et de l'article : " . $e->getMessage();
-        return false;
     }
-}
-
 
 // search
     public function search($search)
@@ -262,7 +256,7 @@ public function updateWikiState($id, $status)
             try {
                 $query = " SELECT 
                 article.id,
-                article.name AS title,  // Renommez article.name en title
+                article.name,
                 article.description,
                 article.status,
                 categorie.name AS categorie_name,

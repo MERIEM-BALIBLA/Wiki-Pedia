@@ -79,26 +79,10 @@
                             </div>
                         </form>
 
-                                </td>
-
-                        <td class="d-flex flex-row">
-                         
-                            <form action="updateview" method="POST">
-                                <input type="hidden" name="id" value="<?= $article['id'] ?>">
-                                <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
-                            </form>
-
-                            <form action="delete" method="POST">
-                                <input type="hidden" name="id" value="<?= $article['id'] ?>">
-                                <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
-                            </form>
-
-                        </td>
+                                </td
                     </tr>
                 <?php endforeach;
-                endif;?>
-                    
-					
+                      endif;?>
                 </tbody>
             </table>
                     

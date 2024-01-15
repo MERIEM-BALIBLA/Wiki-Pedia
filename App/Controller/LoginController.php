@@ -75,8 +75,6 @@ class LoginController extends BaseController
         session_unset(); // Désactive toutes les variables de session
         session_destroy(); // Détruit la session
 
-        // Rediriger vers la page de connexion (ou toute autre page que vous souhaitez)
-        // $this -> show('login');
         header ('Location: ' . APP_URL . 'login');
         exit();
     }

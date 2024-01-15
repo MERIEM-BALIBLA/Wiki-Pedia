@@ -22,10 +22,7 @@
 </head>
 <body style="background-color: white;">
     <?php include "App/view/include/navbar.php" ?>
-        <form class="d-flex">
-            <input class="form-control me-2 text-info bg-white custom-input" id="searchInput" type="text" placeholder="Search">
-            <button class="btn btn-primary text-white" type="button" id="searchInput">Search</button>
-        </form>
+        
         </div>
     </div>
     </nav>
@@ -35,7 +32,6 @@
             <div class="text-center p-2" style=" background-color: rgba(0, 123, 255, 0.2); color: rgba(0, 0, 0, 0.5);font-weight:bold;border-radius:10px"><?php   echo "Welcome back " . $_SESSION['name'];?><br>You have any new Wikis ? please <span style="text-decoration:underline;color:blue">Enter here</span></div></a>
         </div>
     </section>
-
     
     <div class="container mt-4">
         <div class="row">

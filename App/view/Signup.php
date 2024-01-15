@@ -9,6 +9,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-hQNynsL8d5TY2NpvWEd8S3utVwZrO2CWOLcQ4hFZIDlB5F3rWGP4sA+V7J5E6eKtZt9zG7XeMlZjtpbP9knSBg==" crossorigin="anonymous" />
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,10 +29,6 @@
 <body>
 
 <?php include "include/nav.php" ?>
-<!-- <form class="d-flex">
-        <input class="form-control me-2 text-info bg-white custom-input" type="text" placeholder="Search">
-        <button class="btn btn-primary text-white" type="button">Search</button>
-      </form> -->
     </div>
   </div>
 </nav>
@@ -44,16 +41,14 @@
           <div class="card-body p-md-5">
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
                 <form class="mx-1 mx-md-4" method="POST" action ="<?=APP_URL?>signup/adduser">
-
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <label class="form-label" for="form3Example1c">Your Name</label>
-                      <input name="name" type="text" id="form3Example1c" class="form-control" />
+                      <label class="form-label">Your Name</label>
+                      <input name="name" type="text" id="name" onkeyup="validateName()" class="form-control"/>
+                      <span id="name-error"></span>
                     </div>
                   </div>
 
@@ -61,7 +56,10 @@
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="form3Example3c">Your Email</label>
-                      <input name="email" type="email" id="form3Example3c" class="form-control" />
+                      <input name="email" type="email" id="email"
+                      onkeyup="validateEmail()" class="form-control" />
+                      <span id="email-error"></span>
+
                     </div>
                   </div>
 
@@ -69,7 +67,10 @@
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="form3Example4c">Password</label>
-                      <input name="password" type="password" id="form3Example4c" class="form-control" />
+                      <input name="password" type="password" id="password" 
+                      onkeyup="validatePass()" class="form-control" />
+                      <span id="password-error"></span>
+
                     </div>
                   </div>
 
@@ -77,40 +78,16 @@
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="form3Example4cd">Repeat your password</label>
-                      <input name="confirm_password" type="password" id="form3Example4cd" class="form-control" />
+                      <input name="confirm_password" type="password" id="confirm" 
+                      onkeyup="validateConfirm()" class="form-control" />
+                      <span id="confirm-error"></span>
+
                     </div>
                   </div>
 
-                  <!-- ... Autres champs de formulaire ... -->
-
-                      <!-- <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                              <label class="form-label" for="form3Example4c">Role</label>
-                              <select name="role" id="form3Example4c" class="form-control">
-                              <php
-                                // Remplacez $roles par votre tableau de rôles
-                                foreach ($roles as $role) {
-                                    echo "<option value='" . $role . "'>" . $role . "</option>";
-                                }
-                                ?>
-                              </select>
-                          </div>
-                      </div> -->
-
-<!-- ... Autres champs de formulaire ... -->
-
-
-                  <!-- <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                    <label class="form-check-label" for="form2Example3">
-                      I agree all statements in <a href="#!">Terms of service</a>
-                    </label>
-                  </div> -->
-
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <form action="">
-                      <button type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
+                      <button onclick="return validateForm()" type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
                     </form>
                   </div>
 
@@ -134,6 +111,113 @@
 </section>
 
 <?php include "include/footer.php" ?>
+
+<!-- ... Votre code HTML ... -->
+
+<script>
+  let nameInput = document.getElementById('name');
+  let errorN = document.getElementById('name-error');
+  let emailInput = document.getElementById('email');
+  let errorE = document.getElementById('email-error');
+  let passwordInput = document.getElementById('password');
+  let errorP = document.getElementById('password-error');
+  let confirmInput = document.getElementById('confirm');
+  let errorC = document.getElementById('confirm-error');
+
+  function validateName() {
+    let nameValue = nameInput.value;
+    if(nameValue.length == 0){
+      // errorN.innerHTML = 'Name is required' 
+      displayError(errorN, 'Name is required', false);
+        return false;
+    } 
+    if(!nameValue.trim().match(/^[A-Za-z]/)){
+      errorN.innerHTML ='Form name is invalid'
+        return false;
+    }
+    if(nameValue.trim().length > 20) {
+      errorN.innerHTML = 'name form is invalid'
+
+      
+        return false;
+    }   
+    // errorN.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>'
+    return true;
+  }
+
+  function validateEmail() {
+    let emailValue = emailInput.value;
+    if(emailValue.length == 0){
+      errorE.innerHTML ='Email is required'
+        return false;
+    }
+    if(!emailValue.trim().match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)){
+      errorE.innerHTML ='Email form is invalid'
+        return false;
+    }
+    // errorE.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>'
+    return true;
+  }
+
+
+  function validatePass(){
+    var passwordValue = passwordInput.value;
+    
+    if (passwordValue.length === 0) {
+      errorP.innerHTML = 'Password is required';
+        return false;
+    }
+  
+    if (passwordValue.length < 8) {
+      errorP.innerHTML = 'Password should be at least 8 characters';
+        return false;
+    }
+
+    if (passwordValue.length < 10) {
+      errorP.innerHTML = 'Password should not be grater than 8 characters';
+        return false;
+    }
+
+
+    // errorP.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>';
+    return true;
+}
+
+function validateConfirm(){
+    var confirmdValue = confirmInput.value;
+    
+    if (confirmdValue.length === 0) {
+      errorC.innerHTML = 'Password is required';
+        return false;
+    }
+  
+    if (confirmdValue.length < 8) {
+      errorC.innerHTML = 'Password should match the abvious password';
+        return false;
+    }
+
+    if (confirmdValue.length < 10) {
+      errorC.innerHTML = 'Password should match the abvious password';
+        return false;
+    }
+
+
+    // errorC.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>';
+    return true;
+}
+
+  function validateForm() {
+    if (!validateName() || !validateEmail() || !validatePass() || !validateConfirm()) {
+      return false;
+    } else {
+      alert("Enregistré");
+      return true;
+    }
+  }
+</script>
+
+<!-- ... Votre code HTML ... -->
+
 
 </body>
 

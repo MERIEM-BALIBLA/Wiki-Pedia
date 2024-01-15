@@ -18,7 +18,6 @@ class IndexController extends BaseController {
         $categories = $categoriesModel->index('categorie','*');
         $articles = $articleModel->readView();
         
-
         $data = [
             'categories' => $categories,
             'articles' => $articles
@@ -26,14 +25,19 @@ class IndexController extends BaseController {
 
         $this->show('Index', $data);
         // $this->show('home', $data);
-
     }
 
     public function search()
     {
-        $obj = new ArticleModel();
-        $input = $_POST['search'];
-        $result = $obj->search($input);
-        echo json_encode($result);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
+            $obj = new ArticleModel();
+            $input = $_POST['search'];
+            $result = $obj->search($input);
+            echo json_encode($result);
+        } else {
+            // Gérer le cas où la requête n'est pas une requête POST ou si 'search' n'est pas défini
+            echo json_encode([]);
+        }
     }
+
 }

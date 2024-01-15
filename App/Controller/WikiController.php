@@ -65,7 +65,7 @@
 
         
         
-    
+        // insert
         public function insert()
         {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -90,7 +90,7 @@
                 
                     // Tags du formulaire
                     $tagsInput = isset($_POST['tag']) ? $_POST['tag'] : [];
-        // var_dump($tagsInput);die;
+        
                     $tagModel = new TagModel();
         
                     foreach ($tagsInput as $tag) {
@@ -160,8 +160,7 @@
 
 
 
-// WikiController.php
-
+// WikiController update
 public function update()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

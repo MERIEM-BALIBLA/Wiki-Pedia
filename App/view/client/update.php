@@ -37,13 +37,16 @@
             <input type="text" class="form-control" name="description" id="exampleInputPassword1"  class="form-control" value="<?= $wiki[0]['description'] ?>" required>
         </div>
 
-        <select name="categorie_id" id="categorie" class="form-control" required>
-            <option value="<?= $wiki[0]['categorie_id'] ?>"><?= $wiki[0]['categorie_name'] ?></option>
-            <?php foreach($categories as $categorie) :?>
-                <option value="<?= $categorie['id'] ?>"><?= $categorie['name'] ?></option>
-            <?php endforeach ?>
-        </select>
-
+        <div>
+            <label class="form-label">Categorie</label>
+            <select name="categorie_id" id="categorie" class="form-control" required>
+                <option value="<?= $wiki[0]['categorie_id'] ?>"><?= $wiki[0]['categorie_name'] ?></option>
+                <?php foreach($categories as $categorie) :?>
+                    <option value="<?= $categorie['id'] ?>"><?= $categorie['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        
         <div>
             <label class="form-label">Tags</label>
             <select name="tag[]" id="tag" multiple required>
