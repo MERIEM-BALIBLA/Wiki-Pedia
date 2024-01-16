@@ -18,8 +18,9 @@ footer .top-footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background: #0f5470 ;
+    background: linear-gradient(0deg, rgba(0, 0, 255, 0.4) 0%, rgb(163, 177, 238));
     height: 16.4227rem;
+    width: 100%;
 }
 
 .footer-links {

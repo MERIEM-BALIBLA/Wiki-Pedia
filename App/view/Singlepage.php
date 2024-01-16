@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="<?=APP_URL?>public/assets/css/header_footer.css">
   <title></title>
 </head>
-<body>
+<body >
 <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'author' || $_SESSION['role'] === 'admin'): ?>
     <?php include "include/navbar.php"; ?>
 <?php else: ?>
@@ -40,17 +40,36 @@
         <p> Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
         </div>
     </section>
-     
-    <div style="text-align:center;">
-        <?php if (isset($_POST['id'])) : ?>
-                        <h1 ><?= $articles[0]['name'] ?></h1>
-                        <p style="font-size:20px;"><?= $articles[0]['description'] ?></p>
-                        <p style="font-size:20px;"><?= $articles[0]['categorie_name'] ?></p>
-                        <p style="font-size:20px;"><?= $articles[0]['user_name'] ?></p>
-                        <p style="font-size:20px;"><?= $articles[0]['tag_name'] ?></p>
-                    
-        <?php endif; ?>
+   
+    <div  style="background:#eee; height: 70vh; width: 100%;" class="p-4">
+    <div class="container mt-4" style="background:#eee;">
+        <div class="row">
+            <?php if (isset($_POST['id'])) : ?>
+                <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-in" data-aos-delay="200" style="padding: 2%;">
+                    <div class="my-4">
+                        <h1><?= $articles['name'] ?></h1>
+                        <p style="font-size:20px;">category : <?= $articles['categorie_name'] ?></p>
+                        <p style="font-size:20px;">Content : <?= $articles['description'] ?></p>
+                    </div>
+                    <div class="my-4">
+                        <p style="font-size:20px;">The Author : <?= $articles['user_name'] ?></p>
+                        <p style="font-size:20px;"><?= $articles['tag_name'] ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div class="col-lg-6 order-1 order-lg-2 hero-img d-flex flex-column justify-content-center" data-aos="zoom-in" data-aos-delay="200">
+                <div class="mb-4">
+                    <img src="<?=APP_URL?>public/images/singlepage.jpg" class="img-fluid animated" alt="">
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+
+
+
 <?php include "include/footer.php" ?>
 
 </body>

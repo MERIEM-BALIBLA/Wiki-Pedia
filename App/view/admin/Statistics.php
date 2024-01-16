@@ -15,28 +15,49 @@
 <body style="display :flex">
 <?php include 'App/view/admin/include/side.php' ?>
 
-                <div class="container-fluid" style="width: 94%;">
-    
-                    </div>
-                    <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-						<th>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
-							</span>
-						</th>
-                        <th>Tag name</th>
-                       
-                    </tr>
-                </thead>
-                <tbody>
-                
+   
+        <div class="row" style="margin-top:4%;">
+                <div class="col-2 px-4 py-2 " style="background-color: #eee;margin-left: 2.5%;text-align: left; color: black; border-radius: 4px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: 2px solid rgba(0, 0, 255, 0.2);">
+                    <h4>Number of categories</h4>
+                    <p><?php echo $countCat; ?></p>
+                </div>
+                <div class="col-2 px-4 py-2 " style="background-color: #eee;margin-left: 2.5%;text-align: left; color: black; border-radius: 4px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: 2px solid rgba(0, 0, 255, 0.2);">
+                    <h4>Number of Tags</h4>
+                    <p><?php echo $countTag; ?></p>
+                </div>
+                <div class="col-2 px-4 py-2 " style="background-color: #eee;margin-left: 2.5%;text-align: left; color: black; border-radius: 4px; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); border: 2px solid rgba(0, 0, 255, 0.2);">
+                    <h4>Number of Articles</h4>
+                    <p><?php echo $countArticle; ?></p>
+                </div>
+        </div>
+        <div>
+        
+        <!-- article qui ewiste au milieu -->
+        <!-- <p>Midle Article Title : <php echo $midle['name']; ?></p>
+        <p>Author : <php echo $midle['user_name']; ?></p> -->
+
+        <!-- les articles qui ont la meme categorie -->
+        <!-- <php foreach ($Artcount as $category): ?>
+            <div style="background:black">
+            
+                <p>Articles of <php echo $category['category_name']; ?>: <php echo $category['article_count']; ?></p>
+                <div> <php echo $category['article_list']; ?></div>
+            </div>
+        <php endforeach; ?> -->
+
+        <!-- les articles qui ont le meme tag -->
+        <!-- <php foreach ($ArtCountTag as $tag): ?>
+            <div style="background:white">
+            
+                <p>Articles of tag <php echo $tag['tag_name']; ?>: <php echo $tag['article_count']; ?></p>
+                <div> <php echo $tag['article_list']; ?></div>
+            </div>
+        <php endforeach; ?> -->
+
+
+
+        </div>
                     
-					
-                </tbody>
-            </table>
                     
         </div>
     </div>

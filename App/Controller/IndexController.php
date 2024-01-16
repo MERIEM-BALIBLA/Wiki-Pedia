@@ -15,7 +15,7 @@ class IndexController extends BaseController {
         $categoriesModel = new CategorieModel();
         // $articleModel = new ArticleModel();
 
-        $categories = $categoriesModel->index('categorie','*');
+        $categories = $categoriesModel->readcategorie();
         $articles = $articleModel->readView();
         
         $data = [

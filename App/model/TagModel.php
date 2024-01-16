@@ -31,6 +31,7 @@ class TagModel extends BaseModel
             try {
                 // Utilisez les données passées plutôt qu'un tableau vide
                 parent::insert($table, $data);
+                
                 return true;
             } catch (PDOException $e) {
                 // Gérer l'erreur ici si nécessaire (par exemple, journalisation de l'erreur)
@@ -73,17 +74,35 @@ class TagModel extends BaseModel
             }
         }
 
-//         public function updateTag($data, $id)
-// {
-//     try {
-//         parent::update('pivot', ['tag_id' => $data['tag']], ['article_id' => $id]);
-//         return true;
-//     } catch (PDOException $e) {
-//         error_log("Error updating tag record: " . $e->getMessage());
-//         return false;
-//     }
-// }
+          // count 
+          public function count(){
+            try {
+                $query = "SELECT COUNT(*) As TagNumber from tag";
+                $statement = $this->db->prepare($query);
+                $statement->execute();
+                return $statement->fetch(PDO::FETCH_ASSOC)['TagNumber'];
+            } catch (PDOException $e) {
+                throw $e;
+            }
+        }
 
+        public function getTag($tag)
+        {
+            try {
+                $query = "SELECT * FROM tag WHERE tag = :tag";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindParam(':email', $tag, PDO::PARAM_STR);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                // Handle the exception, log, or return false
+                echo "Error getting data by tag: " . $e->getMessage();
+                return false;
+            }
+        }
+        
+        public function add(){
 
+        }
 }
 

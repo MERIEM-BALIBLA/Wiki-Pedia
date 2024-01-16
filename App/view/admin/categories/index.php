@@ -27,8 +27,8 @@
                         </div>
                         <div class="col-sm-6">
                             
-                            <a href="categorie/insert" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new article</span></a>
-                            <a href="deleteall" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>		
+                            <a href="<?=APP_URL?>categorie/insert" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add new article</span></a>
+                            <a href="<?=APP_URL?>categorie/deleteall" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>		
                            
                         </div>
                         </div>
@@ -64,12 +64,12 @@
 
                         <td class="d-flex flex-row">
                          
-                            <form action="categorie/updateview" method="POST">
+                            <form action="<?=APP_URL?>categorie/updateview" method="POST">
                                 <input type="hidden" name="id" value="<?= $categorie['id'] ?>">
                                 <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></button>
                             </form>
 
-                            <form action="delete" method="POST">
+                            <form action="<?=APP_URL?>categorie/delete" method="POST">
                                 <input type="hidden" name="id" value="<?= $categorie['id'] ?>">
                                 <button type="submit" name="submit"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></button>
                             </form>

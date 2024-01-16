@@ -20,24 +20,23 @@
 
   <title></title>
 </head>
-<body style="background-color: white;">
+<body style="background-color: white; height:100vh" >
     <?php include "App/view/include/navbar.php" ?>
         
         </div>
     </div>
     </nav>
-    
-    <section class="p-4" style="width:100%; background-color: #ffffff;">
+    <div>
+    <section class="p-4" style="width:100%; background-color: #eee;">
         <a style="font-size:20px;text-decoration:none;" href="<?=APP_URL?>wiki/add">
             <div class="text-center p-2" style=" background-color: rgba(0, 123, 255, 0.2); color: rgba(0, 0, 0, 0.5);font-weight:bold;border-radius:10px"><?php   echo "Welcome back " . $_SESSION['name'];?><br>You have any new Wikis ? please <span style="text-decoration:underline;color:blue">Enter here</span></div></a>
-        </div>
+      
     </section>
     
     <div class="container mt-4">
         <div class="row">
-                 <!-- <php   echo "Hello, " . $_SESSION['name'];
-                    var_dump($_SESSION['user_id'])
-                 ?> -->
+            <div class="table-responsive">
+                
         <table class="table table-light">
                 <thead>
                     <tr style="">
@@ -56,7 +55,7 @@
                     <tr>
 						
                         <td><?= $article['name'] ?></td>
-                        <td><?= $article['description'] ?></td>
+                        <td ><?= $article['description'] ?></td>
                         <!-- <td><= $article['status'] ?></td> -->
                         <td><?= $article['categorie_name'] ?></td>
                         <td><?= $article['user_name'] ?></td>
@@ -101,25 +100,17 @@
                                 </div>
                             </div>
                         </td>
-
-<!-- ... Votre code existant ... -->
-
-                                
                             </form>
-
-
                         </td>
                     </tr>
                 <?php endforeach;
                 endif;?>		
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
-
-
-
-
+</div>
 
 
 </div>

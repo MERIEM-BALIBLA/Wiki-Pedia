@@ -51,7 +51,7 @@ class BaseModel {
     public function index($table, $columns)
     {
         try {
-            $query = "SELECT $columns FROM $table ORDER BY id DESC LIMIT 5";
+            $query = "SELECT $columns FROM $table ORDER BY id DESC";
             $stmt = $this->db->prepare($query);
             
             // Exécutez la requête

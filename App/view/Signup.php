@@ -86,9 +86,9 @@
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <form action="">
+                    <!-- <form action=""> -->
                       <button onclick="return validateForm()" type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
-                    </form>
+                    <!-- </form> -->
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
@@ -110,113 +110,93 @@
   </div>
 </section>
 
-<?php include "include/footer.php" ?>
+<!-- <php include "include/footer.php" ?> -->
 
 <!-- ... Votre code HTML ... -->
 
 <script>
-  let nameInput = document.getElementById('name');
-  let errorN = document.getElementById('name-error');
-  let emailInput = document.getElementById('email');
-  let errorE = document.getElementById('email-error');
-  let passwordInput = document.getElementById('password');
-  let errorP = document.getElementById('password-error');
-  let confirmInput = document.getElementById('confirm');
-  let errorC = document.getElementById('confirm-error');
+    let nameInput = document.getElementById('name');
+    let errorN = document.getElementById('name-error');
+    let emailInput = document.getElementById('email');
+    let errorE = document.getElementById('email-error');
+    let passwordInput = document.getElementById('password');
+    let errorP = document.getElementById('password-error');
+    let confirmInput = document.getElementById('confirm');
+    let errorC = document.getElementById('confirm-error');
 
-  function validateName() {
-    let nameValue = nameInput.value;
-    if(nameValue.length == 0){
-      // errorN.innerHTML = 'Name is required' 
-      displayError(errorN, 'Name is required', false);
+    function validateName() {
+      let nameValue = nameInput.value;
+      if (nameValue.length == 0) {
+        errorN.innerHTML = '<span style="color: red;">Name is required</span>';
         return false;
-    } 
-    if(!nameValue.trim().match(/^[A-Za-z]/)){
-      errorN.innerHTML ='Form name is invalid'
+      }
+      if (!nameValue.trim().match(/^[A-Za-z]/)) {
+        errorN.innerHTML = '<span style="color: red;">Name is invalid</span>';
         return false;
-    }
-    if(nameValue.trim().length > 20) {
-      errorN.innerHTML = 'name form is invalid'
-
-      
+      }
+      if (nameValue.trim().length > 20) {
+        errorN.innerHTML = '<span style="color: red;">Name must </span>';
         return false;
-    }   
-    // errorN.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>'
-    return true;
-  }
-
-  function validateEmail() {
-    let emailValue = emailInput.value;
-    if(emailValue.length == 0){
-      errorE.innerHTML ='Email is required'
-        return false;
-    }
-    if(!emailValue.trim().match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)){
-      errorE.innerHTML ='Email form is invalid'
-        return false;
-    }
-    // errorE.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>'
-    return true;
-  }
-
-
-  function validatePass(){
-    var passwordValue = passwordInput.value;
-    
-    if (passwordValue.length === 0) {
-      errorP.innerHTML = 'Password is required';
-        return false;
-    }
-  
-    if (passwordValue.length < 8) {
-      errorP.innerHTML = 'Password should be at least 8 characters';
-        return false;
-    }
-
-    if (passwordValue.length < 10) {
-      errorP.innerHTML = 'Password should not be grater than 8 characters';
-        return false;
-    }
-
-
-    // errorP.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>';
-    return true;
-}
-
-function validateConfirm(){
-    var confirmdValue = confirmInput.value;
-    
-    if (confirmdValue.length === 0) {
-      errorC.innerHTML = 'Password is required';
-        return false;
-    }
-  
-    if (confirmdValue.length < 8) {
-      errorC.innerHTML = 'Password should match the abvious password';
-        return false;
-    }
-
-    if (confirmdValue.length < 10) {
-      errorC.innerHTML = 'Password should match the abvious password';
-        return false;
-    }
-
-
-    // errorC.innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i>';
-    return true;
-}
-
-  function validateForm() {
-    if (!validateName() || !validateEmail() || !validatePass() || !validateConfirm()) {
-      return false;
-    } else {
-      alert("Enregistré");
+      }
+      errorN.innerHTML = '<span style="color: green;">Your name is valide</span>';
       return true;
     }
+
+    function validateEmail() {
+      let emailValue = emailInput.value;
+      if (emailValue.length == 0) {
+        errorE.innerHTML = '<span style="color: red;">Email is required</span>';
+        return false;
+      }
+      if (!emailValue.trim().match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+        errorE.innerHTML = '<span style="color: red;">Email form is invalid</span>';
+        return false;
+      }
+      errorE.innerHTML = '<span style="color: green;">Your email is valide</span>';
+      return true;
+  }
+
+  function validatePass() {
+      var passwordValue = passwordInput.value;
+      if (passwordValue.length === 0) {
+        errorP.innerHTML = '<span style="color: red;">Password is required</span>';
+        return false;
+      }
+      if (passwordValue.length < 8) {
+        errorP.innerHTML = '<span style="color: red;">Password should be at least 8 characters</span>';
+        return false;
+      }
+      if (passwordValue.length > 10) {
+        errorP.innerHTML = '<span style="color: red;">Password should not be greater than 10 characters</span>';
+        return false;
+      }
+      errorP.innerHTML = '<span style="color: green;">Your password is valid</span>';
+      return true;
+  }
+
+  function validateConfirm() {
+      var confirmValue = confirmInput.value;
+      if (confirmValue.length === 0) {
+        errorC.innerHTML = '<span style="color: red;">Password is required</span>';
+        return false;
+      }
+      if (confirmValue !== passwordInput.value) {
+        errorC.innerHTML = '<span style="color: red;">Passwords do not match</span>';
+        return false;
+      }
+      errorC.innerHTML = '<span style="color: green;">Passwords match</span>';
+      return true;
+  }
+
+  function validateForm() {
+      if (!validateName() || !validateEmail() || !validatePass() || !validateConfirm()) {
+        return false;
+      } else {
+        alert("Enregistré");
+        return true;
+      }
   }
 </script>
-
-<!-- ... Votre code HTML ... -->
 
 
 </body>
